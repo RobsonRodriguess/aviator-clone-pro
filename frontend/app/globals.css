@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0b0c; /* Preto Profundo */
+  --panel: #131518;      /* Cinza Painel */
+  --accent-red: #ff3355;
+  --accent-green: #00e701;
+}
+
+body {
+  background-color: var(--background);
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden; /* Trava o scroll */
+}
+
+/* Animação do Fundo (Estrelas passando) */
+@keyframes star-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100px); }
+}
+
+.animate-bg-move {
+  animation: star-move 2s linear infinite;
+}
+
+/* Animação de Tremor (Crash) */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-4px, -4px); }
+  20%, 40%, 60%, 80% { transform: translate(4px, 4px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Scrollbar Customizada (Fina e Escura) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b0c; 
+}
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

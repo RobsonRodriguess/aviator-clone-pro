@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -- AQUI COMEÇA A MÁGICA DO AVIATOR --
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  balance   Float    @default(100.00) // Começa com 100 dinheiros fictícios
+  createdAt DateTime @default(now())
+  bets      Bet[]
+}
+
+model Game {
+  id          String   @id @default(uuid())
+  crashPoint  Float    // Onde o avião vai explodir (ex: 2.45)
+  hash        String   // Para provar que foi justo (Provably Fair)
+  salt        String   // Segredo usado na criptografia
+  status      String   // 'WAITING', 'FLYING', 'CRASHED'
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+  bets        Bet[]
+}
+
+model Bet {
+  id        String   @id @default(uuid())
+  amount    Float    // Valor da aposta
+  cashout   Float?   // Em quanto o usuário saiu (ex: 1.50x). Se null, perdeu.
+  winAmount Float?   // Quanto ganhou (amount * cashout)
+  userId    String
+  gameId    String
+  user      User     @relation(fields: [userId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id])
+}
