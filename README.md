@@ -45,12 +45,3 @@ http://localhost:3000
 
 ---
 
-### 📤 Como atualizar no GitHub agora:
-
-Abra seu terminal no VS Code e mande a atualização:
-
-```bash
-git add README.md
-git commit -m "Docs: Adiciona nota sobre manipulação em casas de apostas"
-git push
-
